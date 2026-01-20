@@ -3,16 +3,15 @@ load_dotenv()
 
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
-from agents.career_agent import analyze_with_ai
 
 app = FastAPI()
 
-# CORS for React
+# ✅ CORS configuration (IMPORTANT)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://127.0.0.1:5173"
+        "https://ai-career-mentor-frontend.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -29,12 +28,16 @@ async def analyze_resume(
     interest: str = Form(None)
 ):
     try:
-        result = await analyze_with_ai(resume_text, interest)
-        return {"result": result}
-    except Exception:
+        # 🔹 Demo / fallback AI response
         return {
-            "result": """
+            "result": f"""
 AI Career Analysis (Demo Mode)
+
+Resume Summary:
+{resume_text}
+
+Career Interest:
+{interest or "Not specified"}
 
 Skill Gaps:
 - Advanced Machine Learning
@@ -57,5 +60,10 @@ Project Ideas:
 - AI Job Recommendation System
 - Career Guidance Chatbot
 """
+        }
+
+    except Exception:
+        return {
+            "result": "AI service temporarily unavailable. Please try again later."
         }
 
