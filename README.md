@@ -71,19 +71,3 @@ A structured career analysis containing skill gaps, career paths, learning roadm
 
 ---
 
-## Project Structure
-
-ai-career-mentor/
-├── backend/
-│   ├── main.py
-│   ├── agents/
-│   │   └── career_agent.py
-│   ├── schemas/
-│   │   └── resume_schema.py
-│   └── requirements.txt
-└── frontend/
-    ├── src/
-    ├── package.json
-    └── vite.config.js
-
----
