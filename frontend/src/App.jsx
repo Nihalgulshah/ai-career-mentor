@@ -14,16 +14,19 @@ function App() {
     setResult("");
 
     try {
-      const response = await fetch("http://localhost:8000/analyze", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          resume_text: resume,
-          interest: interest,
-        }),
-      });
+      const response = await fetch(
+        "https://ai-career-mentor-backend-gdwi.onrender.com/analyze",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            resume_text: resume,
+            interest: interest,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to analyze resume");
@@ -66,6 +69,7 @@ function App() {
       </form>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
+
       {result && (
         <pre style={{ marginTop: "24px", whiteSpace: "pre-wrap" }}>
           {result}
